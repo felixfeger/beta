@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Metro Beta is Live</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Helvetica Neue', 'Helvetica', 'Arial', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#F8F9FA',
+                            100: '#F1F3F5',
+                            200: '#E9ECEF',
+                            300: '#DEE2E6',
+                            400: '#CED4DA',
+                            500: '#ADB5BD',
+                            600: '#6C757D',
+                            700: '#495057',
+                            800: '#343A40',
+                            900: '#111827',
+                            black: '#0A0A0C',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #FFFFFF;
+            color: #111827;
+        }
+        
+        /* Smooth progress transitions */
+        .progress-ring-circle {
+            transition: stroke-dashoffset 0.1s linear;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+
+        /* Sleek card drop shadow */
+        .crisp-shadow {
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+        }
+
+        .crisp-border {
+            border: 1px solid #E5E7EB;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between bg-white text-gray-900 antialiased selection:bg-gray-900 selection:text-white">
+
+    <!-- Top Border Accent Line -->
+    <div class="w-full h-1 bg-gray-900"></div>
+
+    <!-- Main Container -->
+    <main class="container mx-auto px-4 py-12 md:py-20 flex-grow flex flex-col items-center justify-center max-w-3xl">
+        
+        <!-- Main Card Container -->
+        <div class="w-full bg-white crisp-border rounded-2xl p-8 md:p-12 crisp-shadow relative overflow-hidden text-center">
+            
+            <!-- Top Auto-Redirect Linear Progress Bar -->
+            <div class="absolute top-0 left-0 w-full h-1 bg-gray-100">
+                <div id="linear-progress" class="h-full bg-gray-900 w-full transition-all duration-100 linear"></div>
+            </div>
+
+            <!-- Brand Logo Header -->
+            <div class="mb-8 flex justify-center items-center">
+                <div class="inline-flex items-center justify-center min-h-[50px] px-2 py-1">
+                    <img 
+                        src="https://citymetro.xyz/logo.PNG" 
+                        alt="City Metro Logo" 
+                        class="h-10 md:h-12 w-auto object-contain max-w-[260px]"
+                        onerror="this.onerror=null; this.style.display='none'; document.getElementById('logo-fallback').classList.remove('hidden');"
+                    />
+                    <!-- Helvetica Minimalist Fallback -->
+                    <div id="logo-fallback" class="hidden flex items-center space-x-2 text-gray-900 font-bold text-2xl tracking-tight">
+                        <div class="w-8 h-8 rounded-lg bg-gray-900 text-white flex items-center justify-center text-sm font-black">CM</div>
+                        <span>City <span class="font-normal text-gray-500">Metro</span></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Status Pill -->
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gray-100 border border-gray-200 text-gray-700 text-xs font-semibold uppercase tracking-wider mb-6">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                Official Release
+            </div>
+
+            <!-- Headline -->
+            <h1 class="text-3xl md:text-5xl font-bold tracking-tight text-gray-900 mb-4">
+                City Metro Beta is Live!
+            </h1>
+            
+            <!-- Description -->
+            <p class="text-gray-600 text-base md:text-lg max-w-xl mx-auto mb-10 font-normal leading-relaxed">
+                We've moved to our new official domain. Experience faster routing, real-time tracking, and a redesigned interface at <a href="https://citymetro.xyz" class="text-gray-900 font-semibold underline underline-offset-4 hover:text-gray-600 transition-colors">citymetro.xyz</a>.
+            </p>
+
+            <!-- Countdown Visual Indicator -->
+            <div class="mb-10 flex flex-col items-center justify-center">
+                <div class="relative flex items-center justify-center">
+                    <svg class="w-32 h-32 md:w-36 md:h-36">
+                        <circle class="text-gray-100" stroke-width="6" stroke="currentColor" fill="transparent" r="54" cx="64" cy="64" />
+                        <circle id="countdown-ring" class="progress-ring-circle text-gray-900" stroke-width="6" stroke-dasharray="339.29" stroke-dashoffset="0" stroke-linecap="round" stroke="currentColor" fill="transparent" r="54" cx="64" cy="64" />
+                    </svg>
+                    <!-- Displayed Countdown Number -->
+                    <div class="absolute flex flex-col items-center justify-center text-center">
+                        <span id="timer-display" class="text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight">10</span>
+                        <span class="text-[10px] text-gray-400 uppercase tracking-widest font-semibold">Seconds</span>
+                    </div>
+                </div>
+                <p id="status-text" class="text-xs text-gray-500 mt-4">
+                    Automatically redirecting you to <span class="font-medium text-gray-900">citymetro.xyz</span>...
+                </p>
+            </div>
+
+            <!-- Primary Control Buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto mb-12">
+                <!-- Redirect Now Button (Solid dark) -->
+                <a href="https://citymetro.xyz" id="redirect-btn" class="w-full sm:w-1/2 px-6 py-3.5 bg-gray-900 hover:bg-gray-800 text-white font-medium rounded-xl transition-all duration-150 text-sm flex items-center justify-center gap-2 group shadow-sm">
+                    <span>Redirect Now</span>
+                    <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-0.5 transition-transform"></i>
+                </a>
+
+                <!-- Pause/Resume Button -->
+                <button id="pause-btn" onclick="togglePause()" class="w-full sm:w-1/2 px-6 py-3.5 bg-gray-100 hover:bg-gray-200 text-gray-800 border border-gray-200 font-medium rounded-xl transition-all duration-150 text-sm flex items-center justify-center gap-2">
+                    <i id="pause-icon" class="fa-solid fa-pause text-xs text-gray-600"></i>
+                    <span id="pause-text">Pause Redirect</span>
+                </button>
+            </div>
+
+            <!-- Features Highlights Grid -->
+            <div class="pt-8 border-t border-gray-100 grid grid-cols-1 md:grid-cols-3 gap-4 text-left">
+                <div class="p-4 rounded-xl bg-gray-50 border border-gray-100">
+                    <div class="w-8 h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-gray-900 text-xs mb-3 shadow-2xs">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h2 class="text-sm font-bold text-gray-900 mb-1">Faster Planning</h2>
+                    <p class="text-xs text-gray-500 leading-relaxed">Instant trip generation with optimized route search engine.</p>
+                </div>
+
+                <div class="p-4 rounded-xl bg-gray-50 border border-gray-100">
+                    <div class="w-8 h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-gray-900 text-xs mb-3 shadow-2xs">
+                        <i class="fa-solid fa-location-dot"></i>
+                    </div>
+                    <h2 class="text-sm font-bold text-gray-900 mb-1">Live Transit Tracking</h2>
+                    <p class="text-xs text-gray-500 leading-relaxed">Real-time GPS vehicle updates for accurate arrival times.</p>
+                </div>
+
+                <div class="p-4 rounded-xl bg-gray-50 border border-gray-100">
+                    <div class="w-8 h-8 rounded-lg bg-white border border-gray-200 flex items-center justify-center text-gray-900 text-xs mb-3 shadow-2xs">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+                    <h2 class="text-sm font-bold text-gray-900 mb-1">Ultra-Clean UI</h2>
+                    <p class="text-xs text-gray-500 leading-relaxed">Simplified interface built for fast navigation on all devices.</p>
+                </div>
+            </div>
+
+            <!-- Manual Redirect Link Option -->
+            <p class="mt-8 text-xs text-gray-400">
+                If you are not redirected automatically, <a href="https://citymetro.xyz" class="text-gray-700 underline font-medium hover:text-gray-900">click here to open citymetro.xyz</a>.
+            </p>
+
+        </div>
+
+    </main>
+
+    <!-- Clean Footer -->
+    <footer class="w-full py-6 text-center text-xs text-gray-500 border-t border-gray-100 bg-white">
+        <div class="container mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3 max-w-3xl">
+            <p>&copy; 2026 City Metro. All rights reserved.</p>
+            <div class="flex items-center space-x-6">
+                <a href="https://citymetro.xyz" class="text-gray-600 hover:text-gray-900 transition-colors">citymetro.xyz</a>
+                <a href="mailto:support@citymetro.xyz" class="text-gray-600 hover:text-gray-900 transition-colors">Support</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Countdown Logic -->
+    <script>
+        const TARGET_URL = "https://citymetro.xyz";
+        const TOTAL_TIME = 10;
+        
+        let remainingTime = TOTAL_TIME;
+        let isPaused = false;
+        let intervalId = null;
+
+        // UI Element References
+        const timerDisplay = document.getElementById('timer-display');
+        const linearProgress = document.getElementById('linear-progress');
+        const countdownRing = document.getElementById('countdown-ring');
+        const pauseIcon = document.getElementById('pause-icon');
+        const pauseText = document.getElementById('pause-text');
+        const statusText = document.getElementById('status-text');
+
+        // Circumference calculation for SVG countdown ring
+        const radius = countdownRing.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius;
+        countdownRing.style.strokeDasharray = `${circumference} ${circumference}`;
+
+        function updateDisplay() {
+            // Display Math
+            const seconds = Math.max(0, Math.ceil(remainingTime));
+            timerDisplay.textContent = seconds;
+
+            // Top Progress Bar Width
+            const percentage = (remainingTime / TOTAL_TIME) * 100;
+            linearProgress.style.width = `${Math.max(0, percentage)}%`;
+
+            // Circle Ring Offset
+            const offset = circumference - (remainingTime / TOTAL_TIME) * circumference;
+            countdownRing.style.strokeDashoffset = offset;
+        }
+
+        function startTimer() {
+            const updateInterval = 100; // 100ms update resolution
+            
+            intervalId = setInterval(() => {
+                if (!isPaused) {
+                    remainingTime -= updateInterval / 1000;
+
+                    if (remainingTime <= 0) {
+                        remainingTime = 0;
+                        updateDisplay();
+                        clearInterval(intervalId);
+                        performRedirect();
+                    } else {
+                        updateDisplay();
+                    }
+                }
+            }, updateInterval);
+        }
+
+        function togglePause() {
+            isPaused = !isPaused;
+            if (isPaused) {
+                pauseIcon.className = "fa-solid fa-play text-xs text-gray-700";
+                pauseText.textContent = "Resume Redirect";
+                statusText.textContent = "Redirect paused.";
+                statusText.className = "text-xs font-medium text-amber-600 mt-4";
+            } else {
+                pauseIcon.className = "fa-solid fa-pause text-xs text-gray-600";
+                pauseText.textContent = "Pause Redirect";
+                statusText.innerHTML = 'Automatically redirecting you to <span class="font-medium text-gray-900">citymetro.xyz</span>...';
+                statusText.className = "text-xs text-gray-500 mt-4";
+            }
+        }
+
+        function performRedirect() {
+            statusText.textContent = "Redirecting now...";
+            window.location.href = TARGET_URL;
+        }
+
+        // Initialize timer when page loads
+        window.onload = function() {
+            updateDisplay();
+            startTimer();
+        };
+    </script>
+</body>
+</html>
